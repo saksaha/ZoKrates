@@ -59,7 +59,6 @@ pub fn exec(sub_matches: &ArgMatches) -> Result<(), String> {
 }
 
 fn cli_check<T: Field>(sub_matches: &ArgMatches) -> Result<(), String> {
-    println!("Checking {}\n", sub_matches.value_of("input").unwrap());
     let path = PathBuf::from(sub_matches.value_of("input").unwrap());
 
     let file = File::open(path.clone())
@@ -81,6 +80,7 @@ fn cli_check<T: Field>(sub_matches: &ArgMatches) -> Result<(), String> {
     };
 
     let stdlib_path = sub_matches.value_of("stdlib-path").unwrap();
+
     match Path::new(stdlib_path).exists() {
         true => Ok(()),
         _ => Err(format!(

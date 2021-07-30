@@ -17,6 +17,7 @@ use clap::{App, AppSettings, Arg};
 use ops::*;
 
 fn main() {
+    println!("main()");
     // set a custom panic hook
     std::panic::set_hook(Box::new(panic_hook));
 
@@ -27,6 +28,7 @@ fn main() {
 }
 
 fn cli() -> Result<(), String> {
+    println!("cli()");
     // cli specification using clap library
     let matches = App::new("ZoKrates")
         .setting(AppSettings::SubcommandRequiredElseHelp)
@@ -55,6 +57,8 @@ fn cli() -> Result<(), String> {
             #[cfg(any(feature = "bellman", feature = "ark", feature = "libsnark"))]
             verify::subcommand()])
         .get_matches();
+
+    println!("cli(): subcommand: {:?}", matches.subcommand());
 
     match matches.subcommand() {
         ("compile", Some(sub_matches)) => compile::exec(sub_matches),

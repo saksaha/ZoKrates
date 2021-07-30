@@ -93,7 +93,7 @@ fn cli_compile<T: Field>(sub_matches: &ArgMatches) -> Result<(), String> {
         )
     }
 
-    println!("Compiling {}\n", sub_matches.value_of("input").unwrap());
+    // println!("Compiling {}\n", sub_matches.value_of("input").unwrap());
     let path = PathBuf::from(sub_matches.value_of("input").unwrap());
     let bin_output_path = Path::new(sub_matches.value_of("output").unwrap());
     let abi_spec_path = Path::new(sub_matches.value_of("abi-spec").unwrap());
@@ -118,6 +118,8 @@ fn cli_compile<T: Field>(sub_matches: &ArgMatches) -> Result<(), String> {
     };
 
     let stdlib_path = sub_matches.value_of("stdlib-path").unwrap();
+    println!("123123: {}", stdlib_path);
+
     match Path::new(stdlib_path).exists() {
         true => Ok(()),
         _ => Err(format!(
